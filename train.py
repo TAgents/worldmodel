@@ -22,12 +22,12 @@ import torch.nn.functional as F
 
 @dataclass
 class Config:
-    latent_dim: int = 192
+    latent_dim: int = 64
     pred_hidden: int = 512
     pred_layers: int = 4
-    encoder_widths: tuple = (32, 64, 128, 192)
+    encoder_widths: tuple = (32, 64, 96, 128)
     lambda_sigreg: float = 1.0
-    lambda_warmup_steps: int = 0  # 0 = no warmup
+    lambda_warmup_steps: int = 1000  # 0 = no warmup
     grad_clip: float = 1.0
     lr: float = 3e-4
     weight_decay: float = 1e-4
