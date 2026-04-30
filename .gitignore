@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pt
+*.pth
+*.npz
+*.npy
+.venv/
+.env
+data/*
+!data/.gitkeep
+checkpoints/*
+!checkpoints/.gitkeep
+runs/*
+!runs/.gitkeep
+.DS_Store
