@@ -17,3 +17,7 @@ Append-only log of accepted experiments. Format:
 ## 87eede52 — score=0.007 (Δ +0.007)
 **Change:** p01: latent_dim 192→64, encoder widths shrunk, λ warmup 0→1000 steps (program.md first hypothesis: small latent + warmup against over-regularization)
 **Why:** TODO — agent should fill this in.
+
+## 70a66f8e — score=0.040 (Δ +0.033)
+**Change:** p07: p04 multi-step K=4 + lr 3e-4 → 1e-4 (compounded grad through K calls is 4× too strong at original lr)
+**Why:** TODO — agent should fill this in.
