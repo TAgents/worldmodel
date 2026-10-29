@@ -1,0 +1,5 @@
+[
+  {"tick": 0, "source_id": "cheap", "value": true},
+  {"tick": 1, "source_id": "cheap", "value": false},
+  {"tick": 2, "source_id": "precise", "value": true}
+]

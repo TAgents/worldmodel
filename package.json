@@ -1,0 +1,10 @@
+{
+  "name": "world-model-explorer-checks",
+  "private": true,
+  "scripts": {
+    "test": "node scripts/check_explorer_dom.mjs && node scripts/check_learning_dom.mjs && node scripts/check_imports_dom.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  }
+}

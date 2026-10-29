@@ -1,0 +1,127 @@
+{
+  "commit": "dc0cafea9ed58224bb2cb2fb4117fe9ff83592d6",
+  "files": {
+    ".gitignore": {
+      "bytes": 144,
+      "git_blob_sha1": "1ada63acd8afec808e336a36cd23693b1efd93ab",
+      "sha256": "887e1acca0e244b9d45057cb210bb85a896968f86d16159f2327dc37e728e41e"
+    },
+    "README.md": {
+      "bytes": 1464,
+      "git_blob_sha1": "d6358131f88912e41c6b9714c39949e8c7dec996",
+      "sha256": "2b3c871324dff3569aa3907443937326077794300099306e57488fdfb68dfb84"
+    },
+    "STATUS.md": {
+      "bytes": 5523,
+      "git_blob_sha1": "b51b052bea71c9409d66590076745b04435513e4",
+      "sha256": "e70b9ccddc65faeddafef38a48480590d18f8aefc4aaea5553f43b243cc84e93"
+    },
+    "checkpoints/.gitkeep": {
+      "bytes": 0,
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "data/.gitkeep": {
+      "bytes": 0,
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "envs/__init__.py": {
+      "bytes": 53,
+      "git_blob_sha1": "a5cdb2607f68f27c8fdcedc0fece7b759cec05ca",
+      "sha256": "73784b89a919179780f210d04d429d8cc3775a69a422f84856a6f6a2da2fd656"
+    },
+    "envs/two_room.py": {
+      "bytes": 5091,
+      "git_blob_sha1": "c64648021dcc6e8ef8fab11490d34035e0cfeca9",
+      "sha256": "18ddc1fa104f0d293820a7523ad5fb724ec581e888c0818117a242c5954ce735"
+    },
+    "eval.py": {
+      "bytes": 5033,
+      "git_blob_sha1": "5bd86186d454fd75adb459697fd0a966494378ab",
+      "sha256": "bc30319faa671a8ebf7dc1803283bfb19de2c09caef15b18415f4fd36aec19e6"
+    },
+    "leaderboard.md": {
+      "bytes": 1206,
+      "git_blob_sha1": "aa00a5bbbc20be4d3e4f197c003fcccc8eeaf229",
+      "sha256": "5c7a13af4961c1273bc9d6197a24a07d1c65326cc4074aa43f275cff6077aa9f"
+    },
+    "patchers/p01_small_latent_warmup.py": {
+      "bytes": 1453,
+      "git_blob_sha1": "511b8e1f1c4e92307667e76e93421b923611a5f8",
+      "sha256": "1211a334539dee95be4e5dfa121718283a72394a84b80439b9898163071b6503"
+    },
+    "patchers/p02_residual_predictor.py": {
+      "bytes": 1367,
+      "git_blob_sha1": "e9ff8f6e76d9dcea10f7edc11bc4e8628fe0aa0c",
+      "sha256": "56da2fd0880af75f67c096e78506b5ffbcc75e182e4e513f9cb3c30437f35287"
+    },
+    "patchers/p03_cosine_loss.py": {
+      "bytes": 1362,
+      "git_blob_sha1": "d30f06948db3f38e44835d2517a4d849a30bb65b",
+      "sha256": "36073847f0f4fae0c447f9375a8a48dfa4582d50cb0a08e01e569f1439c635ee"
+    },
+    "patchers/p04_multistep.py": {
+      "bytes": 5043,
+      "git_blob_sha1": "848421eca03a97fe8522a4dee69cddc1c1ab5603",
+      "sha256": "8d78b39cadd612dfdd4f0c85f325da313d1c2161919607866b0f06b2875a67d5"
+    },
+    "patchers/p05_multistep_k8.py": {
+      "bytes": 1566,
+      "git_blob_sha1": "7c9eb68efa252ca3f6f0cc5a5b19bd0bdd24f43f",
+      "sha256": "fa896b42d81fbee88b928c297c8b5c7043a56f278283aad45a8eb7b52c5badac"
+    },
+    "patchers/p06_multistep_intermediate.py": {
+      "bytes": 5750,
+      "git_blob_sha1": "72535d933a24d334a4a5c4a8c0779a355af9dc86",
+      "sha256": "ae8939fed3cd34d2b7599bbce7d4b4d93c4ff224cf32bde5ecde1f841543283e"
+    },
+    "patchers/p07_p04_lower_lr.py": {
+      "bytes": 1252,
+      "git_blob_sha1": "13b27c7c38f43c83de75831e11fb39db3a837f10",
+      "sha256": "a9b4fc0b6bd800e3ca73cb0e48737baa7a15f9cbbe21a1f01750de7c2a3c4535"
+    },
+    "patchers/p08_bigger_predictor.py": {
+      "bytes": 1048,
+      "git_blob_sha1": "8531af42832e7bff8d50468966027d17b029693b",
+      "sha256": "840ce26adccd3065b7e3fdc7d69799506673c7e344f72c362d90c7a3ac20d56b"
+    },
+    "patchers/p09_k6.py": {
+      "bytes": 781,
+      "git_blob_sha1": "97f6adb85c8cc22a4f946264be1048dd08b9c50e",
+      "sha256": "7477b57436d803a9d8fdde54c1ccfd99c7a30f2075d84e9cf6b9abe96936c9a3"
+    },
+    "patchers/p10_action_embedding.py": {
+      "bytes": 2291,
+      "git_blob_sha1": "99a02df4cb838d9f2bd8d9c0324cefc184676d2b",
+      "sha256": "f13cbbd5ecceb2e4951b747e5f37e7dd34fde76c3114039a44b816794492dbb1"
+    },
+    "program.md": {
+      "bytes": 3223,
+      "git_blob_sha1": "09c8c882d0f28b49157468abeba96581f10bb348",
+      "sha256": "f21043941143edc92b10c39bccc550dab659818e4ccf6de5671bdbbae3664b87"
+    },
+    "ratchet.py": {
+      "bytes": 6193,
+      "git_blob_sha1": "3ae0e6e4ed2e0b3c0f0a6cd91f9ca4b288c6c7ea",
+      "sha256": "0eefa1e12643278255ef7d503ad355fa3e2d81e9681f61eb2d39fc8b0913d5a1"
+    },
+    "requirements.txt": {
+      "bytes": 45,
+      "git_blob_sha1": "9e5f555699136bdf3c87ba587b16cad7df8dc9af",
+      "sha256": "2104904c45eed97fac3c1d4c0ba4e8d32ed3ff3e4905c4a721b2b36b73f0470d"
+    },
+    "runs/.gitkeep": {
+      "bytes": 0,
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "train.py": {
+      "bytes": 8591,
+      "git_blob_sha1": "f6f5551dd2b46c3ca88bb1e7b2623fab17c3aaf9",
+      "sha256": "d194d2db89cf844404dcb29d0c339440a03c930c4c77544b92f97d3631d7fafa"
+    }
+  },
+  "repository": "https://github.com/TAgents/worldmodel",
+  "tag": "legacy-two-room-v1"
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "model_id": "binary-world",
+  "model_version": "1.0.0",
+  "variable": "state",
+  "states": ["healthy", "degraded"],
+  "initial_tick": 0,
+  "tick_duration_seconds": 60,
+  "initial_distribution": {"healthy": 0.9, "degraded": 0.1},
+  "transition_probabilities": {
+    "healthy": {"healthy": 0.98, "degraded": 0.02},
+    "degraded": {"healthy": 0.1, "degraded": 0.9}
+  },
+  "observation_models": {
+    "cheap": {
+      "value_type": "boolean",
+      "alert_probability": {"healthy": 0.2, "degraded": 0.8},
+      "read_cost_credits": 1
+    },
+    "precise": {
+      "value_type": "boolean",
+      "alert_probability": {"healthy": 0.05, "degraded": 0.95},
+      "read_cost_credits": 5
+    }
+  },
+  "forecast_horizon_ticks": 1,
+  "acquisition_limits": {
+    "episode_origin_ticks": 200,
+    "episode_budget_credits": 200,
+    "max_dispatches_per_sensor_per_tick": 1,
+    "max_reads_per_episode": 200
+  }
+}
