@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "world-modeling-engine"
+version = "0.1.0"
+description = "Probabilistic state estimation with explicit model and evidence contracts"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2.12,<3", "psycopg[binary]>=3.2,<4", "fastapi>=0.162,<0.163", "starlette>=1.10,<2", "uvicorn>=0.54,<1", "numpy>=2.0,<3", "scipy>=1.14,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pglast>=7,<9", "httpx2>=2.16,<3"]
+browser = ["playwright>=1.56,<2"]
+local-postgres = ["pgserver==0.1.4"]
+
+[project.scripts]
+world-model = "world_model.__main__:main"
+world-model-evaluate = "world_model.evaluation.__main__:main"
+world-model-store = "world_model.storage.__main__:main"
+world-model-serve = "world_model.api.__main__:main"
+world-model-investigate = "world_model.agents.__main__:main"
+world-model-learn = "world_model.learning.__main__:main"
+world-model-import = "world_model.adapters.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["world_model*"]
+
+[tool.setuptools.package-data]
+"world_model.storage" = ["migrations/*.sql"]
+"world_model.api" = ["static/*.html", "static/*.css", "static/*.js"]
+"world_model.adapters" = ["fixtures/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+filterwarnings = ["error"]
+markers = ["postgres: requires WORLD_MODEL_TEST_DATABASE_URL and an isolated PostgreSQL schema"]

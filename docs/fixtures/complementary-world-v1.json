@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "model_id": "complementary-world",
+  "model_version": "1.0.0",
+  "variable": "mode",
+  "states": ["mode_a", "mode_b", "mode_c"],
+  "initial_tick": 0,
+  "tick_duration_seconds": 60,
+  "initial_distribution": {"mode_a": 0.3333333333333333, "mode_b": 0.3333333333333333, "mode_c": 0.3333333333333333},
+  "transition_probabilities": {
+    "mode_a": {"mode_a": 0.9, "mode_b": 0.05, "mode_c": 0.05},
+    "mode_b": {"mode_a": 0.05, "mode_b": 0.9, "mode_c": 0.05},
+    "mode_c": {"mode_a": 0.05, "mode_b": 0.05, "mode_c": 0.9}
+  },
+  "observation_models": {
+    "probe_a": {"value_type": "boolean", "alert_probability": {"mode_a": 0.95, "mode_b": 0.05, "mode_c": 0.05}, "read_cost_credits": 1},
+    "probe_b": {"value_type": "boolean", "alert_probability": {"mode_a": 0.05, "mode_b": 0.95, "mode_c": 0.05}, "read_cost_credits": 1},
+    "probe_c": {"value_type": "boolean", "alert_probability": {"mode_a": 0.05, "mode_b": 0.05, "mode_c": 0.95}, "read_cost_credits": 1}
+  },
+  "forecast_horizon_ticks": 1,
+  "acquisition_limits": {"episode_origin_ticks": 100, "episode_budget_credits": 100, "max_dispatches_per_sensor_per_tick": 1, "max_reads_per_episode": 100}
+}

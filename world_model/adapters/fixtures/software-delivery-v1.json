@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "model_id": "software-delivery-assumed",
+  "model_version": "1.0.0",
+  "variable": "delivery_condition",
+  "states": ["stable", "unstable"],
+  "initial_tick": 0,
+  "tick_duration_seconds": 86400,
+  "initial_distribution": {"stable": 0.8, "unstable": 0.2},
+  "transition_probabilities": {
+    "stable": {"stable": 0.9, "unstable": 0.1},
+    "unstable": {"stable": 0.2, "unstable": 0.8}
+  },
+  "observation_models": {
+    "unit_tests": {"value_type": "boolean", "alert_probability": {"stable": 0.1, "unstable": 0.7}, "read_cost_credits": 1},
+    "integration_tests": {"value_type": "boolean", "alert_probability": {"stable": 0.05, "unstable": 0.8}, "read_cost_credits": 1}
+  },
+  "forecast_horizon_ticks": 1,
+  "acquisition_limits": {"episode_origin_ticks": 200, "episode_budget_credits": 400, "max_dispatches_per_sensor_per_tick": 1, "max_reads_per_episode": 400}
+}

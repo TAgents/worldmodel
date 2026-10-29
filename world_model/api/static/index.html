@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Inspect probabilistic beliefs, their evidence, and how they change over time.">
+  <title>World Model Explorer</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/assets/explorer.css">
+  <script src="/assets/explorer.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="/" aria-label="World Model Explorer home"><span class="brand-mark" aria-hidden="true">◈</span> WORLD MODEL <span class="brand-sub">/ EXPLORER</span></a>
+    <div class="header-links"><a href="/imports">Import evidence →</a><a href="/learning">Calibration lab →</a></div>
+  </header>
+  <main>
+    <div class="page-heading"><div><p class="eyebrow">EPISTEMIC OBSERVABILITY · V0.1</p><h1>What does the model know?</h1><p class="subtitle">Follow a belief from observation to posterior. Every revision keeps its evidence.</p></div><button id="new-run" class="primary" disabled>＋ New run</button></div>
+    <div class="toolbar">
+      <label class="run-field">RUN <select id="run-select" disabled><option value="">No runs loaded</option></select></label>
+      <label>KNOWLEDGE SNAPSHOT <select id="revision-select" disabled><option value="">Latest available</option></select></label>
+      <button id="refresh" class="quiet">↻ Refresh</button>
+    </div>
+    <div id="message" role="status" aria-live="polite" hidden></div>
+    <section id="empty" class="empty"><span class="empty-symbol" aria-hidden="true">◈</span><h2>Loading your world models…</h2><p>The explorer reads saved publications from the local engine.</p></section>
+    <div id="workspace" hidden>
+      <div class="snapshot-heading"><div><span id="view-badge" class="badge">LATEST SNAPSHOT</span><span id="snapshot-meta"></span></div><button id="return-live" class="quiet" hidden>Return to latest →</button></div>
+      <div class="workspace-grid">
+        <div class="main-column">
+          <section class="panel belief-panel" aria-labelledby="belief-title">
+            <div class="panel-heading"><div><p class="eyebrow">CURRENT STATE · <span id="state-tick"></span></p><h2 id="belief-title">Posterior belief</h2></div><span id="variable" class="mono tag"></span></div>
+            <div id="distribution"></div>
+            <p id="belief-change" class="explanation"></p>
+            <div class="forecast-strip"><div><p class="eyebrow">ONE TICK AHEAD</p><h3 id="forecast-title"></h3><p id="forecast-detail" class="muted"></p></div><strong id="forecast-probability"></strong></div>
+            <p class="footnote">State probabilities are conditional on the registered model and selected evidence. They do not measure uncertainty in the model parameters.</p>
+          </section>
+          <section class="panel" aria-labelledby="history-title">
+            <div class="panel-heading"><div><p class="eyebrow">HOW BELIEFS CHANGE</p><h2 id="history-title">Revision history</h2></div><button id="verify" class="quiet">Verify replay</button></div>
+            <div id="chart" aria-label="Posterior probability by publication sequence"></div>
+            <p class="footnote">One point per publication, including evidence updates within the same environment tick. Select a row to inspect that snapshot.</p>
+            <div class="table-scroll history-scroll"><table><thead><tr><th>Revision</th><th>Trigger</th><th>Tick</th><th id="history-probability-label">Probability</th><th>Learned at (UTC)</th></tr></thead><tbody id="history-body"></tbody></table></div>
+          </section>
+          <section class="panel" aria-labelledby="evidence-title">
+            <div class="panel-heading"><div><p class="eyebrow">OBSERVATIONS, WITH PROVENANCE</p><h2 id="evidence-title">Selected evidence <span id="evidence-count" class="count"></span></h2></div></div>
+            <p class="muted">Only the active observations in this revision’s evidence snapshot. Earlier values remain in their original revisions.</p>
+            <div id="evidence-list"></div>
+          </section>
+          <section id="import-provenance" class="panel" hidden><p class="eyebrow">ORIGINAL SOURCE RECORDS</p><h2>Imported workflow evidence</h2><p id="import-scope" class="muted"></p><div id="import-source-list"></div><details><summary>Import identity</summary><dl id="import-identity"></dl></details><p><a id="import-source-download">Download original export →</a></p><p class="footnote">Source links below belong to observations available in this snapshot. The download contains the complete archival export. GitHub update times are source metadata; the engine's publication times record the later import. Model health probabilities remain conditional on the supplied parameters.</p></section>
+          <section class="panel" aria-labelledby="forecasts-title">
+            <div class="panel-heading"><div><p class="eyebrow">PREDICTIONS AS ISSUED</p><h2 id="forecasts-title">Forecast ledger</h2></div></div>
+            <p class="muted">Advancing time freezes the last forecast for that origin tick. Later evidence never rewrites it.</p>
+            <div class="table-scroll history-scroll"><table><thead><tr><th>Origin → target</th><th>Probability</th><th>Status at snapshot</th><th>Issued at (UTC)</th></tr></thead><tbody id="forecasts-body"></tbody></table></div>
+          </section>
+          <section id="agent-trace-panel" class="panel" aria-labelledby="agent-trace-title" hidden>
+            <div class="panel-heading"><div><p class="eyebrow">DECISIONS, OUTCOMES &amp; COSTS</p><h2 id="agent-trace-title">Investigation trace</h2></div><span id="agent-status" class="badge"></span></div>
+            <p class="muted">Expected information gain is computed before seeing the reading. Failed reads consume credits and their sensor slot.</p>
+            <div id="agent-trace"></div>
+          </section>
+        </div>
+        <aside>
+          <section class="panel" aria-labelledby="agent-title">
+            <p class="eyebrow">BUDGETED SENSOR SELECTION</p><h2 id="agent-title">Autonomous investigation</h2>
+            <p class="muted">The agent chooses synthetic sensor readings by expected uncertainty reduction per credit.</p>
+            <p id="agent-setup-note" class="footnote"></p>
+            <form id="agent-config-form"><fieldset id="agent-config-fields">
+              <div class="form-row"><label>Episode ticks<input id="agent-horizon" type="number" min="1" max="200" value="20" required></label><label>Credit budget<input id="agent-budget" type="number" min="0" value="20" required></label></div>
+              <label>Maximum reads<input id="agent-max-reads" type="number" min="0" value="200" required></label>
+              <fieldset class="source-permissions"><legend>Permitted sensors</legend><div id="agent-sources"></div></fieldset>
+              <details><summary>Stopping thresholds</summary><label>Minimum gain · bits per credit<input id="agent-min-gain" type="number" min="0" step="any" value="0" required></label><label>Stop reading below entropy · bits<input id="agent-entropy" type="number" min="0" step="any" value="0" required></label></details>
+              <button class="secondary wide" type="submit">Enable on this fresh run</button>
+            </fieldset></form>
+            <div id="agent-session" hidden><p id="agent-budget-summary" class="agent-budget"></p><progress id="agent-budget-progress" max="1" value="0" aria-label="Investigation budget spent"></progress><p id="agent-read-summary" class="footnote"></p><div class="agent-buttons"><button id="agent-step" class="secondary">One step</button><button id="agent-run" class="primary">Run episode</button><button id="agent-pause" class="quiet" disabled>Pause</button></div><p class="footnote">Credits are released gradually and carry forward. Run episode continues while this page is open; Pause takes effect after the current action.</p></div>
+          </section>
+          <section class="panel action-panel" aria-labelledby="observation-title">
+            <p class="eyebrow">INVESTIGATE MANUALLY</p><h2 id="observation-title">Add an observation</h2><p class="muted">Enter a sensor reading, including evidence that arrived late.</p>
+            <p id="historical-note" class="historical-note" hidden>Return to the latest snapshot to make changes.</p>
+            <form id="observation-form"><fieldset id="observation-fields">
+              <label>Evidence operation<select id="correction"><option value="">New observation</option></select></label>
+              <div class="form-row"><label>Sensor<select id="source" required></select></label><label>Environment tick<input id="reading-tick" type="number" min="0" step="1" required></label></div>
+              <label>Sensor reading<select id="reading-value"><option value="true">Alert · true</option><option value="false">No alert · false</option></select></label>
+              <button type="submit" class="primary wide">Record evidence</button>
+            </fieldset></form>
+            <div class="advance"><h3>Advance the environment</h3><p class="muted">Apply one transition and freeze the current forecast.</p><button id="advance" class="secondary wide">Advance one tick →</button><p id="clock-note" class="footnote"></p></div>
+          </section>
+          <section class="panel" aria-labelledby="model-title"><p class="eyebrow">EXPLICIT ASSUMPTIONS</p><h2 id="model-title">Model definition</h2><p id="model-name" class="mono"></p><div id="model-tables"></div><div id="model-calibration" hidden></div><details><summary>Model artifact &amp; revision IDs</summary><dl id="provenance"></dl></details><details><summary>Complete registered specification</summary><pre id="model-json"></pre></details></section>
+        </aside>
+      </div>
+    </div>
+    <footer>WORLD MODEL ENGINE <span>Finite-state Bayesian inference · Local research MVP</span></footer>
+  </main>
+  <dialog id="create-dialog" aria-labelledby="create-title"><form id="create-form"><div class="panel-heading"><h2 id="create-title">Start a world-model run</h2><button type="button" id="close-dialog" class="quiet" aria-label="Close">✕</button></div><p class="muted">Each run starts with the model’s prior and an empty evidence history.</p><label>Registered model<select id="create-model" required></select></label><label>Forecast target state<select id="create-target" required></select></label><label>Run identifier<input id="create-id" maxlength="128" pattern="[a-zA-Z0-9_.:\-]+" required></label><label>Environment start · local time<input id="create-epoch" type="datetime-local" step="1" required></label><p class="footnote">Defaults to 24 hours ago so synthetic ticks can advance immediately. An environment tick cannot be later than the engine’s current time.</p><p id="create-error" role="alert" hidden></p><button id="create-submit" type="submit" class="primary wide">Create run</button></form></dialog>
+</body>
+</html>

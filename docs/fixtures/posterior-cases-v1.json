@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "model_fixture": "binary-world-v1.json",
+  "absolute_tolerance": 1e-12,
+  "reference_method": "Exact enumeration of all hidden state paths using rational arithmetic",
+  "observation_semantics": "Only observations already available at the query cutoff are listed; temporal delivery behavior is tested separately.",
+  "cases": [
+    {
+      "name": "initial",
+      "state_tick": 0,
+      "observations": [],
+      "posterior_degraded": "1/10",
+      "next_tick_degraded": "27/250"
+    },
+    {
+      "name": "cheap_positive",
+      "state_tick": 0,
+      "observations": [{"tick": 0, "source_id": "cheap", "value": true}],
+      "posterior_degraded": "4/13",
+      "next_tick_degraded": "189/650"
+    },
+    {
+      "name": "cheap_negative",
+      "state_tick": 0,
+      "observations": [{"tick": 0, "source_id": "cheap", "value": false}],
+      "posterior_degraded": "1/37",
+      "next_tick_degraded": "81/1850"
+    },
+    {
+      "name": "precise_positive",
+      "state_tick": 0,
+      "observations": [{"tick": 0, "source_id": "precise", "value": true}],
+      "posterior_degraded": "19/28",
+      "next_tick_degraded": "108/175"
+    },
+    {
+      "name": "both_positive",
+      "state_tick": 0,
+      "observations": [
+        {"tick": 0, "source_id": "cheap", "value": true},
+        {"tick": 0, "source_id": "precise", "value": true}
+      ],
+      "posterior_degraded": "76/85",
+      "next_tick_degraded": "3429/4250"
+    },
+    {
+      "name": "conflicting_readings",
+      "state_tick": 0,
+      "observations": [
+        {"tick": 0, "source_id": "cheap", "value": true},
+        {"tick": 0, "source_id": "precise", "value": false}
+      ],
+      "posterior_degraded": "4/175",
+      "next_tick_degraded": "351/8750"
+    },
+    {
+      "name": "no_reading_next_tick",
+      "state_tick": 1,
+      "observations": [],
+      "posterior_degraded": "27/250",
+      "next_tick_degraded": "719/6250"
+    },
+    {
+      "name": "cheap_positive_next_tick",
+      "state_tick": 1,
+      "observations": [{"tick": 1, "source_id": "cheap", "value": true}],
+      "posterior_degraded": "108/331",
+      "next_tick_degraded": "5083/16550"
+    },
+    {
+      "name": "mixed_sequence",
+      "state_tick": 2,
+      "observations": [
+        {"tick": 0, "source_id": "cheap", "value": true},
+        {"tick": 1, "source_id": "cheap", "value": false},
+        {"tick": 2, "source_id": "precise", "value": true}
+      ],
+      "posterior_degraded": "196631/287932",
+      "next_tick_degraded": "1117462/1799575"
+    },
+    {
+      "name": "before_late_reading",
+      "state_tick": 1,
+      "observations": [
+        {"tick": 0, "source_id": "cheap", "value": true},
+        {"tick": 1, "source_id": "cheap", "value": false}
+      ],
+      "posterior_degraded": "189/2033",
+      "next_tick_degraded": "10349/101650"
+    },
+    {
+      "name": "after_late_reading",
+      "state_tick": 2,
+      "observations": [
+        {"tick": 0, "source_id": "cheap", "value": true},
+        {"tick": 1, "source_id": "cheap", "value": false},
+        {"tick": 0, "source_id": "precise", "value": false}
+      ],
+      "posterior_degraded": "49391/1697350",
+      "next_tick_degraded": "1935277/42433750"
+    }
+  ]
+}

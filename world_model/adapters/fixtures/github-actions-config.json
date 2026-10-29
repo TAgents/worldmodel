@@ -1,0 +1,8 @@
+{
+  "repository": "example/delivery-demo",
+  "branch": "main",
+  "event": "push",
+  "window_start": "2026-01-01T00:00:00Z",
+  "windows": 7,
+  "workflow_sources": {"unit_tests": 101, "integration_tests": 202}
+}
